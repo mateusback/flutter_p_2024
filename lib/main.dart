@@ -3,7 +3,7 @@ import 'package:flutter_p_2024/app/injection.dart';
 
 import 'app/my_app.dart';
 
-void main() {
-  setupInjection();
+void main() async {
+  await setupInjection();
   runApp(const MyApp());
 }

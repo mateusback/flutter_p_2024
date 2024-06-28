@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_p_2024/app/navigation/routes.dart';
-import 'package:flutter_p_2024/app/view/grades_form.dart';
 
 import 'view/home_page.dart';
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Portal de Horas',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           color: Colors.green,
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         Routes.HOME: (context) => HomePage(),
-        Routes.GRADES_FORM: (context) => GradesForm(),
       },
     );
   }

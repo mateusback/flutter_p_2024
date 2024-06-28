@@ -1,16 +1,20 @@
-# flutter_p_2024
+Aplicativo de Gestão de Notas/Horas Complementares
 
-A new Flutter project.
+Notas
+Insere as matérias separadamente em um botão para isso e depois pode se aplicar as médias de cada trimestre.
+Por exemplo, primeiro insere a matéria Português, ai o sistema já mostra  tela com os 3 trimestres sem nota e só ai pode inserir as médias de cada trimestre e fornecer uma média final.
+Consideram que isso é algo para inserir as notas de vocês, apenas para gerirem suas matérias e notas.
+- Média 7.0
+- 3 Trimestres
 
-## Getting Started
+Horas Complementares
+Nas horas complementares apenas quero que seja feito o cadastro das horas para serem contabilizadas nos grupos, então vão criar uma tela para exibir quantas horas de cada um dos 3 grupos vocês tem e a cada cadastro feito tem que ter:
+Nome do Certificado:
+Descrição:
+Grupo: 1, 2 ou 3
+Horas:
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Grupo 1 - Ensino: 155 Horas
+Grupo 2 - Extensão: 40 Horas
+Grupo 3 - Social: 40 Horas
+Quando chegar a quantidade de horas limite, não permita mais cadastrar outros. Exemplos, chegou em 155 horas ensino, quando a pessoa clicar em cadastrar apresenta um erro que chegou ao limite.

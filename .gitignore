@@ -136,3 +136,13 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+.metadata
+.flutter-plugins
+.packages
+.flutter-plugins-dependencies
+
+/lib/firebase_options.dart
+/pubspec.lock
+/firebase.json
+/android/app/google-services.json

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_p_2024/app/database/firestore/dao/subject_dao_impl.dart';
 import 'package:flutter_p_2024/app/domain/interfaces/subject_dao.dart';
 import 'package:flutter_p_2024/app/domain/services/subject_service.dart';
-import 'package:flutter_p_2024/firebase_options.dart';
+import 'package:flutter_p_2024/app/database/firestore/config/firebase_options.dart';
 import 'package:get_it/get_it.dart';
 
 setupInjection() async {

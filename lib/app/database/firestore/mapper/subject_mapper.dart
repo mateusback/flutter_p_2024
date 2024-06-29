@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_p_2024/app/database/firestore/dao/mapper/grade_mapper.dart';
-import 'package:flutter_p_2024/app/database/firestore/dao/mapper/miss_mapper.dart';
+import 'package:flutter_p_2024/app/database/firestore/mapper/grade_mapper.dart';
+import 'package:flutter_p_2024/app/database/firestore/mapper/miss_mapper.dart';
 import 'package:flutter_p_2024/app/domain/entities/subject.dart';
 
 class SubjectMapper {

@@ -146,3 +146,5 @@ app.*.symbols
 /pubspec.lock
 /firebase.json
 /android/app/google-services.json
+lib/app/database/firestore/config/firebase_options.dart
+pubspec.lock

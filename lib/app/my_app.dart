@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_p_2024/app/navigation/routes.dart';
+import 'package:flutter_p_2024/app/view/subject/subject_list.dart';
 
 import 'view/home_page.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         Routes.HOME: (context) => HomePage(),
+        Routes.SUBJECT_LIST: (context) => SubjectList(),
       },
     );
   }

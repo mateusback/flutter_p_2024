@@ -46,7 +46,13 @@ class GradeList extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(grade.value.toString()),
+                              child: Text(
+                                grade.value.toString(),
+                                style: TextStyle(
+                                    color: grade.value < 6
+                                        ? Colors.red
+                                        : Colors.green),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -60,6 +66,37 @@ class GradeList extends StatelessWidget {
                 : const Text('Nenhuma nota disponível.'),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  // TODO - ADICIONAR LÓGICA PARA ADICIONAR UMA NOTA
+                },
+                child: Icon(Icons.add),
+                heroTag: 'add',
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  // TODO - ADICIONAR LÓGICA PARA EDITAR UMA NOTA
+                },
+                child: Icon(Icons.edit),
+                heroTag: 'edit',
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

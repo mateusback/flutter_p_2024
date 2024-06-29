@@ -7,7 +7,7 @@ class SubjectDaoImpl implements SubjectDao {
   CollectionReference? subjectCollention;
 
   SubjectDaoImpl() {
-    subjectCollention = FirebaseFirestore.instance.collection('subjects');
+    subjectCollention = FirebaseFirestore.instance.collection('subject');
   }
 
   @override

@@ -4,7 +4,7 @@ class GradeMapper {
   static Grade fromMap(Map<String, dynamic> data) {
     return Grade(
       id: data['id'],
-      subjectId: data['subjectId'],
+      period: data['period'],
       value: data['value']?.toDouble() ?? 0.0,
     );
   }
@@ -12,7 +12,7 @@ class GradeMapper {
   static Map<String, dynamic> toMap(Grade grade) {
     return {
       'id': grade.id,
-      'subjectId': grade.subjectId,
+      'period': grade.period,
       'value': grade.value,
     };
   }

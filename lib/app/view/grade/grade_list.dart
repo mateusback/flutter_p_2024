@@ -34,6 +34,11 @@ class GradeList extends StatelessWidget {
                             child: Text('Nota',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Trimestre',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
                         ],
                       ),
                       ...subject!.grades!.map(
@@ -43,6 +48,10 @@ class GradeList extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(grade.value.toString()),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(grade.period.toString()),
+                            )
                           ],
                         ),
                       ),

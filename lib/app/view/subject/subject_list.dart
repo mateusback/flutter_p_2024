@@ -100,7 +100,7 @@ class SubjectList extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.assessment),
                           onPressed: () {
-                            //Todo - implementar
+                            _back.goToGrades(context, subject);
                           },
                         ),
                       ],

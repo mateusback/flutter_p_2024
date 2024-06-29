@@ -35,6 +35,10 @@ abstract class _SubjectListBack with Store {
         .pushNamed(Routes.HOME, arguments: subject); //TODO - MUDAR A ROTA
   }
 
+  goToGrades(BuildContext context, Subject? subject) {
+    Navigator.of(context).pushNamed(Routes.GRADES_LIST, arguments: subject);
+  }
+
   remove(dynamic id, BuildContext context) async {
     await _service.remove(id);
     refreshList();

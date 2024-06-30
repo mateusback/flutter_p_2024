@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_p_2024/app/navigation/routes.dart';
+import 'package:flutter_p_2024/app/view/grade/grade_form.dart';
 import 'package:flutter_p_2024/app/view/grade/grade_list.dart';
 import 'package:flutter_p_2024/app/view/subject/subject_list.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         Routes.HOME: (context) => HomePage(),
         Routes.SUBJECT_LIST: (context) => SubjectList(),
         Routes.GRADES_LIST: (context) => GradeList(context),
+        Routes.GRADE_FORM: (context) => GradeForm(),
       },
     );
   }

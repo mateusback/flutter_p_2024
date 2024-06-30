@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_p_2024/app/domain/entities/grade.dart';
 import 'package:flutter_p_2024/app/domain/entities/subject.dart';
+import 'package:flutter_p_2024/app/navigation/routes.dart';
 
 class GradeList extends StatelessWidget {
   Subject? subject;
@@ -11,6 +13,7 @@ class GradeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var oi = subject!.grades!.first;
     return Scaffold(
       appBar: AppBar(
         title: Text('Notas de ${subject!.name}'),
@@ -49,7 +52,7 @@ class GradeList extends StatelessWidget {
                               child: Text(
                                 grade.value.toString(),
                                 style: TextStyle(
-                                    color: grade.value < 6
+                                    color: grade.value! < 6
                                         ? Colors.red
                                         : Colors.green),
                               ),
@@ -89,7 +92,11 @@ class GradeList extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: FloatingActionButton(
                 onPressed: () {
-                  // TODO - ADICIONAR LÓGICA PARA EDITAR UMA NOTA
+                  Navigator.of(context)
+                      .pushNamed(Routes.GRADE_FORM, arguments: {
+                    'grade': oi,
+                    'subjectId': subject!.id,
+                  });
                 },
                 child: Icon(Icons.edit),
                 heroTag: 'edit',

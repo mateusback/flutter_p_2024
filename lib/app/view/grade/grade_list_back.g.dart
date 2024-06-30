@@ -27,18 +27,12 @@ mixin _$GradeListBack on _GradeListBack, Store {
     });
   }
 
-  late final _$_GradeListBackActionController =
-      ActionController(name: '_GradeListBack', context: context);
+  late final _$refreshListAsyncAction =
+      AsyncAction('_GradeListBack.refreshList', context: context);
 
   @override
-  dynamic refreshList([dynamic value]) {
-    final _$actionInfo = _$_GradeListBackActionController.startAction(
-        name: '_GradeListBack.refreshList');
-    try {
-      return super.refreshList(value);
-    } finally {
-      _$_GradeListBackActionController.endAction(_$actionInfo);
-    }
+  Future<void> refreshList() {
+    return _$refreshListAsyncAction.run(() => super.refreshList());
   }
 
   @override

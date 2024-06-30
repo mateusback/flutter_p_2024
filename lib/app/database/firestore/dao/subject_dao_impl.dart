@@ -36,10 +36,12 @@ class SubjectDaoImpl implements SubjectDao {
   Future<List<Grade>> findGrades(dynamic id) async {
     var doc = await subjectCollection!.doc(id).get();
     if (doc.exists) {
-      return SubjectMapper.gradesFromFirestore(doc);
-    } else {
-      return [];
+      var data = doc.data() as Map<String, dynamic>;
+      List grades = data['grades'] ?? [];
+      var teste = grades.map((grade) => GradeMapper.fromMap(grade)).toList();
+      return teste;
     }
+    return [];
   }
 
   @override
@@ -50,7 +52,7 @@ class SubjectDaoImpl implements SubjectDao {
       var data = snapshot.data() as Map<String, dynamic>;
       List grades = data['grades'];
       grades.removeWhere(
-          (g) => g['value'] == grade.value && g['perido'] == grade.period);
+          (g) => g['value'] == grade.value && g['period'] == grade.period);
       await doc.update({'grades': grades});
     }
   }
@@ -62,7 +64,20 @@ class SubjectDaoImpl implements SubjectDao {
     if (snapshot.exists) {
       var data = snapshot.data() as Map<String, dynamic>;
       List grades = data['grades'];
-      grades.add(GradeMapper.toMap(grade));
+
+      bool gradeExists = false;
+      for (int i = 0; i < grades.length; i++) {
+        var existingGrade = grades[i];
+        if (existingGrade['period'] == grade.period) {
+          grades[i] = GradeMapper.toMap(grade);
+          gradeExists = true;
+          break;
+        }
+      }
+      if (!gradeExists) {
+        grades.add(GradeMapper.toMap(grade));
+      }
+
       await doc.update({'grades': grades});
     } else {
       await doc.set({

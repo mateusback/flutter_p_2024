@@ -11,29 +11,32 @@ part 'grade_list_back.g.dart';
 class GradeListBack = _GradeListBack with _$GradeListBack;
 
 abstract class _GradeListBack with Store {
-  final _service = GetIt.I.get<GradeService>();
+  var _service = GetIt.I.get<GradeService>();
+  late final Subject subject;
+
+  _GradeListBack(BuildContext context, Subject? subject) {
+    this.subject = subject!;
+    refreshList();
+  }
 
   @observable
   late Future<List<Grade>> list;
 
   @action
-  refreshList(dynamic subjectId) {
-    list = _service.find(subjectId);
+  Future<void> refreshList() async {
+    list = _service.find(subject.id);
   }
 
-  _GradeListBack(dynamic subjectId) {
-    refreshList(subjectId);
+  void goToForm(BuildContext context, Grade grade) {
+    Navigator.of(context).pushNamed(
+      Routes.GRADE_FORM,
+      arguments: {'grade': grade, 'subjectId': subject.id},
+    ).then((_) => refreshList());
   }
 
-  goToForm(BuildContext context, Subject? subject) {
-    Navigator.of(context)
-        .pushNamed(Routes.GRADE_FORM, arguments: subject)
-        .then((_) => refreshList(subject!.id));
-  }
-
-  remove(dynamic id, Grade? grade, BuildContext context) async {
-    await _service.remove(id, grade!);
-    refreshList(id);
-    Navigator.of(context).pop();
+  void remove(BuildContext context, Grade grade) async {
+    await _service.remove(subject.id, grade);
+    refreshList();
+    Navigator.of(context).pop(); // Fechar o diálogo após a remoção
   }
 }

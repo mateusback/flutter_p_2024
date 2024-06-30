@@ -7,17 +7,18 @@ class GradeFormBack {
   var _service = GetIt.I.get<GradeService>();
   Grade? grade;
   dynamic subjectId;
-  bool? _valueIsValid;
-  bool? _periodIsValid;
+  bool? _valueIsValid = false;
+  bool? _periodIsValid = false;
 
   bool get isValid => _valueIsValid! && _periodIsValid!;
 
   GradeFormBack(BuildContext context) {
     var parameter = ModalRoute.of(context)?.settings.arguments as Map?;
     grade = (parameter == null) ? Grade() : parameter['grade'] as Grade;
-    subjectId = (parameter == null) ? null : parameter['subjectId'] as dynamic;
+    subjectId = (parameter == null) ? null : parameter['subjectId'];
   }
 
+  //salvar
   save(BuildContext context) async {
     await _service.save(subjectId, grade!);
     Navigator.of(context).pop();
@@ -37,10 +38,10 @@ class GradeFormBack {
   String? validatePeriod(String value) {
     try {
       _service.validatePeriod(value);
-      _valueIsValid = true;
+      _periodIsValid = true;
       return null;
     } catch (e) {
-      _valueIsValid = false;
+      _periodIsValid = false;
       return e.toString();
     }
   }

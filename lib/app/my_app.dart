@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.HOME: (context) => HomePage(),
         Routes.SUBJECT_LIST: (context) => SubjectList(),
-        Routes.GRADES_LIST: (context) => GradeList(),
+        Routes.GRADE_FORM: (context) => GradeForm(),
         Routes.GRADES_LIST: (context) {
           final args = ModalRoute.of(context)?.settings.arguments as Subject;
           return GradeList(subject: args);

@@ -10,7 +10,7 @@ part 'subject_list_back.g.dart';
 class SubjectListBack = _SubjectListBack with _$SubjectListBack;
 
 abstract class _SubjectListBack with Store {
-  final _service = GetIt.I.get<SubjectService>();
+  var _service = GetIt.I.get<SubjectService>();
 
   @observable
   late Future<List<Subject>> list;
@@ -24,23 +24,20 @@ abstract class _SubjectListBack with Store {
     refreshList();
   }
 
-  goToForm(BuildContext context, [Subject? subject]) {
-    Navigator.of(context)
-        .pushNamed(Routes.HOME, arguments: subject) //TODO - MUDAR A ROTA
-        .then(refreshList);
-  }
-
-  goToDetails(BuildContext context, Subject? subject) {
-    Navigator.of(context)
-        .pushNamed(Routes.HOME, arguments: subject); //TODO - MUDAR A ROTA
-  }
-
-  goToGrades(BuildContext context, Subject? subject) {
+  goToGradesList(BuildContext context, [Subject? subject]) {
     Navigator.of(context).pushNamed(Routes.GRADES_LIST, arguments: subject);
   }
 
-  remove(dynamic id, BuildContext context) async {
-    await _service.remove(id);
+  goToForm(BuildContext context, [Subject? subject]) {
+    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+  }
+
+  gotToDetails(BuildContext context, Subject subject) {
+    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+  }
+
+  remove(BuildContext context, dynamic subjectoId) async {
+    await _service.remove(subjectoId);
     refreshList();
     Navigator.of(context).pop();
   }

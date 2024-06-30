@@ -5,19 +5,23 @@ class GradeForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
 
   Widget fieldValue(GradeFormBack back) {
+    var initValue = back.grade?.value;
     return TextFormField(
-        validator: (String? value) => back.validateValue(value!),
-        onSaved: (newValue) => back.grade?.value = double.parse(newValue!),
-        initialValue: back.grade?.value.toString(),
-        decoration: const InputDecoration(labelText: 'Nota:'));
+      validator: (String? value) => back.validateValue(value!),
+      onSaved: (newValue) => back.grade?.value = double.parse(newValue!),
+      initialValue: initValue != null ? initValue.toString() : '',
+      decoration: const InputDecoration(labelText: 'Nota:'),
+    );
   }
 
   Widget fieldPeriod(GradeFormBack back) {
+    var initValue = back.grade?.period;
     return TextFormField(
-        validator: (String? value) => back.validatePeriod(value!),
-        onSaved: (newValue) => back.grade?.period = int.parse(newValue!),
-        initialValue: back.grade?.period.toString(),
-        decoration: const InputDecoration(labelText: 'Trimestre:'));
+      validator: (String? value) => back.validatePeriod(value!),
+      onSaved: (newValue) => back.grade?.period = int.parse(newValue!),
+      initialValue: initValue != null ? initValue.toString() : '',
+      decoration: const InputDecoration(labelText: 'Trimestre:'),
+    );
   }
 
   @override
@@ -25,7 +29,7 @@ class GradeForm extends StatelessWidget {
     var _back = GradeFormBack(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Notas'),
+        title: Text('Cadastro de Contato'),
         actions: [
           IconButton(
               icon: Icon(Icons.save),
@@ -34,8 +38,6 @@ class GradeForm extends StatelessWidget {
                 _form.currentState!.save();
                 if (_back.isValid) {
                   _back.save(context);
-                  // BUG - NÃO FECHA A TELA
-                  Navigator.of(context).pop();
                 }
               })
         ],

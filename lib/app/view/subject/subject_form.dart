@@ -25,11 +25,42 @@ class SubjectForm extends StatelessWidget {
   }
 
   Widget fieldPeriod(SubjectFormBack back) {
-    var initValue = back.subject!.period;
-    return TextFormField(
-      validator: (String? value) => back.validatePeriod(int.parse(value!)),
-      onSaved: (newValue) => back.subject!.period = int.parse(newValue!),
-      initialValue: initValue != null ? initValue.toString() : '',
+    int? selectedPeriod = back.subject?.period;
+
+    return DropdownButtonFormField<int>(
+      value: selectedPeriod,
+      items: const [
+        DropdownMenuItem(
+          value: null,
+          child: Text(
+            'Selecione um item',
+            style: TextStyle(color: Colors.grey),
+          ),
+        ),
+        DropdownMenuItem(
+          value: 1,
+          child: Text('Primeiro Ano'),
+        ),
+        DropdownMenuItem(
+          value: 2,
+          child: Text('Segundo Ano'),
+        ),
+        DropdownMenuItem(
+          value: 3,
+          child: Text('Terceiro Ano'),
+        ),
+        DropdownMenuItem(
+          value: 4,
+          child: Text('Quarto Ano'),
+        ),
+      ],
+      onChanged: (int? newValue) {
+        if (newValue != null) {
+          selectedPeriod = newValue;
+        }
+      },
+      validator: (int? value) => back.validatePeriod((value!)),
+      onSaved: (newValue) => back.subject!.period = newValue,
       decoration: const InputDecoration(labelText: 'Ano da Matéria'),
     );
   }

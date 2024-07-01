@@ -63,9 +63,9 @@ class ComplementaryActivityForm extends StatelessWidget {
           selectedPeriod = newValue;
         }
       },
-      validator: (value) => back.validateGroup(value?.toString() ?? 'null'),
       onSaved: (newValue) => back.activity!.group =
           newValue != null ? EActivityGroup.values[newValue] : null,
+      validator: (value) => back.validateGroup(value?.toString() ?? 'null'),
       decoration: const InputDecoration(labelText: 'Grupo:'),
     );
   }

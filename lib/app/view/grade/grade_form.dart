@@ -15,11 +15,38 @@ class GradeForm extends StatelessWidget {
   }
 
   Widget fieldPeriod(GradeFormBack back) {
-    var initValue = back.grade?.period;
-    return TextFormField(
-      validator: (String? value) => back.validatePeriod(value!),
-      onSaved: (newValue) => back.grade?.period = int.parse(newValue!),
-      initialValue: initValue != null ? initValue.toString() : '',
+    int? selectedPeriod = back.grade?.period;
+
+    return DropdownButtonFormField<int>(
+      value: selectedPeriod,
+      items: const [
+        DropdownMenuItem(
+          value: null,
+          child: Text(
+            'Selecione um Trimestre',
+            style: TextStyle(color: Colors.grey),
+          ),
+        ),
+        DropdownMenuItem(
+          value: 1,
+          child: Text('Primeiro Trimestre'),
+        ),
+        DropdownMenuItem(
+          value: 2,
+          child: Text('Segundo Trimestre'),
+        ),
+        DropdownMenuItem(
+          value: 3,
+          child: Text('Terceiro Trimestre'),
+        ),
+      ],
+      onChanged: (int? newValue) {
+        if (newValue != null) {
+          selectedPeriod = newValue;
+        }
+      },
+      validator: (int? value) => back.validatePeriod(value.toString()),
+      onSaved: (newValue) => back.grade?.period = newValue,
       decoration: const InputDecoration(labelText: 'Trimestre:'),
     );
   }

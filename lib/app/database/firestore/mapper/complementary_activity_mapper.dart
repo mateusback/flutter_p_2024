@@ -9,8 +9,7 @@ class ComplementaryActivityMapper {
       id: doc.id,
       certificateName: data['certificateName'],
       description: data['description'],
-      group: EActivityGroup.values
-          .firstWhere((e) => e.toString() == 'EActivityGroup.${data['group']}'),
+      group: EActivityGroup.values[data['group'] as int],
       hours: data['hours'],
     );
   }

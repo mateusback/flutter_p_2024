@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_p_2024/app/database/firestore/dao/complementary_activity_dao_imp.dart';
+import 'package:flutter_p_2024/app/database/firestore/dao/complementary_activity_dao_impl.dart';
 import 'package:flutter_p_2024/app/database/firestore/dao/subject_dao_impl.dart';
 import 'package:flutter_p_2024/app/domain/interfaces/complementary_activity_dao.dart';
 import 'package:flutter_p_2024/app/domain/interfaces/subject_dao.dart';
@@ -31,14 +31,8 @@ registerComplemenaryActivityDependencies(GetIt getIt) {
       ComplementaryActivityService());
   getIt.registerSingleton<ComplementaryActivityDao>(
       ComplementaryActivityDaoImpl());
-  // BUG - POSSIVELMENTE ALGUM ERRO AQUI
 }
 
 startFirebase() async {
-  try {
-    await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
-  } catch (e) {
-    print(e);
-  }
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }

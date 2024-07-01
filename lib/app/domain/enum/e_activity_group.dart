@@ -1,7 +1,7 @@
 enum EActivityGroup {
-  ensino,
-  extensao,
-  social,
+  Ensino,
+  Extensao,
+  Social,
 }
 
 extension EActivityGroupExtension on EActivityGroup {

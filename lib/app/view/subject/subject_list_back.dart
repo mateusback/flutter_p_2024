@@ -29,15 +29,15 @@ abstract class _SubjectListBack with Store {
   }
 
   goToForm(BuildContext context, [Subject? subject]) {
-    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+    Navigator.of(context).pushNamed(Routes.SUBJECT_FORM, arguments: subject);
   }
 
   gotToDetails(BuildContext context, Subject subject) {
     Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
   }
 
-  remove(BuildContext context, dynamic subjectoId) async {
-    await _service.remove(subjectoId);
+  remove(BuildContext context, dynamic subjectId) async {
+    await _service.remove(subjectId);
     refreshList();
     Navigator.of(context).pop();
   }

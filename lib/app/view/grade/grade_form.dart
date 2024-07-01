@@ -29,7 +29,7 @@ class GradeForm extends StatelessWidget {
     var _back = GradeFormBack(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Contato'),
+        title: Text('Cadastro de Notas'),
         actions: [
           IconButton(
               icon: Icon(Icons.save),

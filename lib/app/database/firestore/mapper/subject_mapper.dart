@@ -11,13 +11,17 @@ class SubjectMapper {
       id: doc.id,
       name: data['name'],
       teacherName: data['teacherName'],
-      grades: (data['grades'] as List)
-          .map((grade) => GradeMapper.fromMap(grade))
-          .toList(),
+      grades: data['grades'] != null
+          ? (data['grades'] as List)
+              .map((grade) => GradeMapper.fromMap(grade))
+              .toList()
+          : [],
       period: data['period'],
-      misses: (data['misses'] as List)
-          .map((miss) => MissMapper.fromMap(miss))
-          .toList(),
+      misses: data['misses'] != null
+          ? (data['misses'] as List)
+              .map((miss) => MissMapper.fromMap(miss))
+              .toList()
+          : [],
     );
   }
 

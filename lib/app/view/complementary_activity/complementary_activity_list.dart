@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_p_2024/app/domain/entities/subject.dart';
-import 'package:flutter_p_2024/app/view/subject/subject_list_back.dart';
+import 'package:flutter_p_2024/app/domain/entities/complementary_activity.dart';
+import 'package:flutter_p_2024/app/domain/enum/e_activity_group.dart';
+import 'package:flutter_p_2024/app/view/complementary_activity/complementary_activity_list_back.dart';
 
-class SubjectList extends StatelessWidget {
-  final _back = SubjectListBack();
+class ComplementaryActivityList extends StatelessWidget {
+  final _back = ComplementaryActivityListBack();
 
   Widget iconEditButton(VoidCallback onPressed) {
     return IconButton(
       onPressed: onPressed,
       icon: const Icon(Icons.edit),
       color: Colors.orange,
-    );
-  }
-
-  Widget iconGradesButton(VoidCallback onPressed) {
-    return IconButton(
-      onPressed: onPressed,
-      icon: const Icon(Icons.list_alt_outlined),
-      color: Colors.greenAccent,
     );
   }
 
@@ -56,7 +49,7 @@ class SubjectList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gerenciador de Matérias"),
+        title: const Text("Gerenciador de Horas Complementares"),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -64,6 +57,7 @@ class SubjectList extends StatelessWidget {
               _back.refreshList();
             },
           ),
+          //TODO - REMOVER, FACILITA A NEGAVEGAÇÃO EM TESTES
           IconButton(
             icon: const Icon(Icons.home),
             onPressed: () {
@@ -83,40 +77,45 @@ class SubjectList extends StatelessWidget {
                 ),
               );
             }
-            List<Subject> list = futureData.data!;
+            List<ComplementaryActivity> list = futureData.data!;
+
+            // Agrupar atividades por grupo e somar as horas
+            Map<EActivityGroup, int> groupedHours = {};
+            for (var activity in list) {
+              if (groupedHours.containsKey(activity.group)) {
+                groupedHours[activity.group] =
+                    groupedHours[activity.group]! + activity.hours;
+              } else {
+                groupedHours[activity.group] = activity.hours;
+              }
+            }
+
+            // Converter o mapa em uma lista de pares chave-valor
+            List<MapEntry<EActivityGroup, int>> groupedHoursList =
+                groupedHours.entries.toList();
+
             return ListView.builder(
-              itemCount: list.length,
+              itemCount: groupedHoursList.length,
               itemBuilder: (context, i) {
-                var subject = list[i];
-                var allGrades = subject.grades = subject.grades ?? [];
-                double sumGrades = 0, average = 0;
-                if (allGrades.length > 0) {
-                  sumGrades = allGrades.fold(
-                      0, (sum, grade) => sum + (grade.value ?? 0));
-                  average = sumGrades / allGrades.length;
-                }
+                var entry = groupedHoursList[i];
+                var group = entry.key;
+                var totalHours = entry.value;
 
                 return ListTile(
-                  leading: CircleAvatar(child: Text(subject.name?[0] ?? '')),
-                  title: Text(subject.name ?? ''),
-                  onTap: () {
-                    //TODO - IMPLEMENTAR
-                  },
-                  subtitle: Text(
-                    'Professor: ${subject.teacherName ?? ''}\nFaltas: ${subject.misses?.length ?? 0}\nMédia: $average',
-                  ),
+                  leading: CircleAvatar(
+                      child: Text(group.toString().substring(15, 16))),
+                  title: Text(group.toString().substring(
+                      15)), // Para remover o prefixo 'EActivityGroup.'
+                  subtitle: Text('Total de Horas: $totalHours'),
                   trailing: Container(
                     width: 120,
                     child: Row(
                       children: [
                         iconEditButton(() {
-                          _back.goToForm(context, subject);
+                          // Implementar ação de edição se necessário
                         }),
                         iconRemoveButton(context, () {
-                          _back.remove(context, subject.id!);
-                        }),
-                        iconGradesButton(() {
-                          _back.goToGradesList(context, subject);
+                          // Implementar ação de remoção se necessário
                         }),
                       ],
                     ),
@@ -129,7 +128,7 @@ class SubjectList extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _back.goToForm(context, Subject());
+          // Implementar ação de adicionar nova atividade
         },
         backgroundColor: Colors.greenAccent,
         shape: CircleBorder(),

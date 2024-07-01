@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // TODO - COLOCAR AÇÃO
+                Navigator.of(context).pushNamed(Routes.COMPLEMENTARY_LIST);
               },
               child: const Text('Registrar Horas'),
             ),
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 // TODO - COLOCAR AÇÃO
               },
-              child: const Text('Registrar Faltas'),
+              child: const Text('Registrar Faltas {EM DESENVOVIMENTO}'),
             ),
             const SizedBox(height: 20),
             const Icon(

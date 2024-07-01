@@ -16,7 +16,7 @@ class SubjectService {
     _repository.save(subject);
   }
 
-  remove(int id) {
+  remove(dynamic id) {
     _repository.remove(id);
   }
 

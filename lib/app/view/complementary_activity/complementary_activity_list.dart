@@ -117,7 +117,7 @@ class ComplementaryActivityList extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Implementar ação de adicionar nova atividade
+          _back.goToForm(context);
         },
         backgroundColor: Colors.greenAccent,
         shape: CircleBorder(),

@@ -38,7 +38,7 @@ abstract class _ComplementaryActivityListBack with Store {
   goToForm(BuildContext context,
       [ComplementaryActivity? complementaryActivity]) {
     Navigator.of(context)
-        .pushNamed(Routes.HOME, arguments: complementaryActivity);
+        .pushNamed(Routes.COMPLEMENTARY_FORM, arguments: complementaryActivity);
   }
 
   remove(BuildContext context, dynamic complementaryId) async {

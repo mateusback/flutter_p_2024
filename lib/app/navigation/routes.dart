@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_p_2024/app/domain/entities/subject.dart';
 import 'package:flutter_p_2024/app/view/complementary_activity/certificate_list.dart';
+import 'package:flutter_p_2024/app/view/complementary_activity/complementary_activity_form.dart';
 import 'package:flutter_p_2024/app/view/complementary_activity/complementary_activity_list.dart';
 import 'package:flutter_p_2024/app/view/grade/grade_form.dart';
 import 'package:flutter_p_2024/app/view/grade/grade_list.dart';
@@ -16,6 +17,7 @@ class Routes {
   static const String SUBJECT_FORM = 'subject-form';
   static const String COMPLEMENTARY_LIST = 'complementary-list';
   static const String CERTIFICATES_LIST = 'certificates-details';
+  static const String COMPLEMENTARY_FORM = 'complementary-form';
 
   static Map<String, Widget Function(BuildContext)> configRoutes() {
     return {
@@ -34,6 +36,7 @@ class Routes {
         return CertificateList(
             group: args['group'], activities: args['activities']);
       },
+      COMPLEMENTARY_FORM: (context) => ComplementaryActivityForm(),
     };
   }
 }

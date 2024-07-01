@@ -29,7 +29,7 @@ class ComplementaryActivityMapper {
       'id': activity.id,
       'certificateName': activity.certificateName,
       'description': activity.description,
-      'group': activity.group.toInt(),
+      'group': activity.group!.toInt(),
       'hours': activity.hours,
     };
   }

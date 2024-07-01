@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_p_2024/app/domain/entities/complementary_activity.dart';
-import 'package:flutter_p_2024/app/domain/entities/subject.dart';
+import 'package:flutter_p_2024/app/domain/enum/e_activity_group.dart';
 import 'package:flutter_p_2024/app/domain/services/complementary_activity_service.dart';
 import 'package:flutter_p_2024/app/navigation/routes.dart';
 import 'package:get_it/get_it.dart';
@@ -26,16 +26,19 @@ abstract class _ComplementaryActivityListBack with Store {
     refreshList();
   }
 
-  goToGradesList(BuildContext context, [Subject? subject]) {
-    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+  goToCertificates(BuildContext context,
+      [List<ComplementaryActivity?>? groupedActivities,
+      EActivityGroup? group]) {
+    Navigator.of(context).pushNamed(
+      Routes.CERTIFICATES_LIST,
+      arguments: {'group': group, 'activities': groupedActivities},
+    );
   }
 
-  goToForm(BuildContext context, [Subject? subject]) {
-    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
-  }
-
-  gotToDetails(BuildContext context, Subject subject) {
-    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+  goToForm(BuildContext context,
+      [ComplementaryActivity? complementaryActivity]) {
+    Navigator.of(context)
+        .pushNamed(Routes.HOME, arguments: complementaryActivity);
   }
 
   remove(BuildContext context, dynamic complementaryId) async {

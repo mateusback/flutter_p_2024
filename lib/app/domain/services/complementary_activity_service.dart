@@ -1,7 +1,6 @@
 import 'package:flutter_p_2024/app/database/firestore/dao/complementary_activity_dao_impl.dart';
 import 'package:flutter_p_2024/app/domain/entities/complementary_activity.dart';
 import 'package:flutter_p_2024/app/domain/exception/domain_layer_exception.dart';
-import 'package:get_it/get_it.dart';
 
 class ComplementaryActivityService {
   final _repository = new ComplementaryActivityDaoImpl();

@@ -79,15 +79,14 @@ class ComplementaryActivityList extends StatelessWidget {
             }
             List<ComplementaryActivity> list = futureData.data!;
 
-            // Agrupar atividades por grupo e somar as horas
             Map<EActivityGroup, int> groupedHours = {};
+            Map<EActivityGroup, List<ComplementaryActivity>> groupedActivities =
+                {};
             for (var activity in list) {
-              if (groupedHours.containsKey(activity.group)) {
-                groupedHours[activity.group] =
-                    groupedHours[activity.group]! + activity.hours;
-              } else {
-                groupedHours[activity.group] = activity.hours;
-              }
+              groupedHours[activity.group!] =
+                  (groupedHours[activity.group] ?? 0) + activity.hours!;
+              groupedActivities[activity.group!] =
+                  (groupedActivities[activity.group] ?? [])..add(activity);
             }
 
             // Converter o mapa em uma lista de pares chave-valor
@@ -104,22 +103,12 @@ class ComplementaryActivityList extends StatelessWidget {
                 return ListTile(
                   leading: CircleAvatar(
                       child: Text(group.toString().substring(15, 16))),
-                  title: Text(group.toString().substring(
-                      15)), // Para remover o prefixo 'EActivityGroup.'
+                  title: Text(group.toString().substring(15)),
                   subtitle: Text('Total de Horas: $totalHours'),
-                  trailing: Container(
-                    width: 120,
-                    child: Row(
-                      children: [
-                        iconEditButton(() {
-                          // Implementar ação de edição se necessário
-                        }),
-                        iconRemoveButton(context, () {
-                          // Implementar ação de remoção se necessário
-                        }),
-                      ],
-                    ),
-                  ),
+                  onTap: () {
+                    _back.goToCertificates(
+                        context, groupedActivities[group], group);
+                  },
                 );
               },
             );

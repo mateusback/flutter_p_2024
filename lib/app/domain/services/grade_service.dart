@@ -28,14 +28,12 @@ class GradeService {
 
   validateValue(String value) {
     try {
-      double parsedValue = double.tryParse(value)!;
+      double.tryParse(value)!;
     } catch (e) {
       throw DomainLayerException('A nota deve ser um número');
     }
     double parsedValue = double.tryParse(value)!;
-    if (value == null) {
-      throw DomainLayerException('A nota é obrigatória');
-    } else if (parsedValue > maximumValue) {
+    if (parsedValue > maximumValue) {
       throw DomainLayerException('A nota deve ser menor que $maximumValue');
     } else if (parsedValue < minimumValue) {
       throw DomainLayerException('A nota deve ser maior que $minimumValue');
@@ -44,14 +42,12 @@ class GradeService {
 
   validatePeriod(String peirod) {
     try {
-      int parsedPeriod = int.tryParse(peirod)!;
+      int.tryParse(peirod)!;
     } catch (e) {
       throw DomainLayerException('O Trimestre deve ser um número');
     }
     int parsedPeriod = int.tryParse(peirod)!;
-    if (peirod == null) {
-      throw DomainLayerException('O Trimestre é obrigatório');
-    } else if (parsedPeriod > maximumValue) {
+    if (parsedPeriod > maximumValue) {
       throw DomainLayerException(
           'O Trimestre deve ser menor que $maximunPeriod');
     } else if (parsedPeriod < minimumValue) {

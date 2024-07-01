@@ -18,6 +18,16 @@ class GradeList extends StatelessWidget {
     );
   }
 
+  Color getAverageColor(double average) {
+    if (average >= 7) {
+      return Colors.greenAccent;
+    } else if (average >= 5) {
+      return Colors.yellowAccent;
+    } else {
+      return Colors.redAccent;
+    }
+  }
+
   Widget iconRemoveButton(BuildContext context, VoidCallback onPressed) {
     return IconButton(
       icon: const Icon(Icons.delete),
@@ -32,14 +42,6 @@ class GradeList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notas de ${subject!.name}'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              _back.goToForm(context, Grade());
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
       body: Observer(
         builder: (context) {
@@ -54,32 +56,57 @@ class GradeList extends StatelessWidget {
               }
               List<Grade> list = snapshot.data!;
               list.sort((a, b) => a.period!.compareTo(b.period!));
+
+              double average =
+                  list.map((g) => g.value!).reduce((a, b) => a + b) /
+                      list.length;
+
               return ListView.builder(
-                itemCount: list.length,
+                itemCount: list.length + 1,
                 itemBuilder: (context, index) {
-                  var grade = list[index];
-                  return ListTile(
-                    leading:
-                        CircleAvatar(child: Text(grade.period!.toString())),
-                    title: Text('${grade.period}º Trimestre'),
-                    subtitle: Text('Nota: ${grade.value}'),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        iconEditButton(() {
-                          _back.goToForm(context, grade);
-                        }),
-                        iconRemoveButton(context, () {
-                          _showDeleteDialog(context, grade);
-                        }),
-                      ],
-                    ),
-                  );
+                  if (index < list.length) {
+                    var grade = list[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                          child: Text(grade.period!.toString()),
+                          backgroundColor: getAverageColor(grade.value!)),
+                      title: Text('${grade.period}º Trimestre'),
+                      subtitle: Text('Nota: ${grade.value}'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          iconEditButton(() {
+                            _back.goToForm(context, grade);
+                          }),
+                          iconRemoveButton(context, () {
+                            _showDeleteDialog(context, grade);
+                          }),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        child: const Icon(Icons.calculate),
+                        backgroundColor: getAverageColor(average),
+                      ),
+                      title: const Text('Média das Notas'),
+                      subtitle: Text('Média: ${average.toStringAsFixed(2)}'),
+                    );
+                  }
                 },
               );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _back.goToForm(context, Grade());
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.greenAccent,
+        shape: CircleBorder(),
       ),
     );
   }

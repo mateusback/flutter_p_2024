@@ -38,6 +38,7 @@ class GradeForm extends StatelessWidget {
                 _form.currentState!.save();
                 if (_back.isValid) {
                   _back.save(context);
+                  //BUG - ATUALIZAR A LISTA DEPOIS DE SALVAR
                 }
               })
         ],

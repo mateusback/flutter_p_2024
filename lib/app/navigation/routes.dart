@@ -33,8 +33,7 @@ class Routes {
       CERTIFICATES_LIST: (context) {
         final args =
             ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-        return CertificateList(
-            group: args['group'], activities: args['activities']);
+        return CertificateList(group: args['group']);
       },
       COMPLEMENTARY_FORM: (context) => ComplementaryActivityForm(),
     };

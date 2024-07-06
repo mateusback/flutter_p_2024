@@ -106,8 +106,7 @@ class ComplementaryActivityList extends StatelessWidget {
                   title: Text(group.toString().substring(15)),
                   subtitle: Text('Total de Horas: $totalHours'),
                   onTap: () {
-                    _back.goToCertificates(
-                        context, groupedActivities[group], group);
+                    _back.goToCertificates(context, group);
                   },
                 );
               },

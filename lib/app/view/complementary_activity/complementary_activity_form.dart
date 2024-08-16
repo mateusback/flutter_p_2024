@@ -29,6 +29,7 @@ class ComplementaryActivityForm extends StatelessWidget {
       onSaved: (newValue) => back.activity!.hours = int.parse(newValue!),
       initialValue: initValue != null ? initValue.toString() : '',
       decoration: const InputDecoration(labelText: 'Quantidade de horas:'),
+      validator: (value) => back.validateHours(value!),
     );
   }
 

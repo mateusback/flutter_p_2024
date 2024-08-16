@@ -37,6 +37,6 @@ abstract class _GradeListBack with Store {
   void remove(BuildContext context, Grade grade) async {
     await _service.remove(subject.id, grade);
     refreshList();
-    Navigator.of(context).pop(); // Fechar o diálogo após a remoção
+    Navigator.of(context).pop();
   }
 }

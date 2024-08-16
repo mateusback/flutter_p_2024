@@ -7,7 +7,6 @@ class ComplementaryActivityService {
   final _repository = new ComplementaryActivityDaoImpl();
 
   save(ComplementaryActivity activity) {
-    validateAll(activity);
     _repository.save(activity);
   }
 
@@ -17,10 +16,6 @@ class ComplementaryActivityService {
 
   Future<List<ComplementaryActivity>> find() {
     return _repository.find();
-  }
-
-  validateAll(ComplementaryActivity activity) {
-    validateGroup(int.parse(activity.group.toString()));
   }
 
   validateGroup(int value) {

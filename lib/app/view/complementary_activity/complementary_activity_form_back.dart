@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_p_2024/app/domain/entities/complementary_activity.dart';
 import 'package:flutter_p_2024/app/domain/services/complementary_activity_service.dart';
+import 'package:flutter_p_2024/app/navigation/routes.dart';
 import 'package:get_it/get_it.dart';
 
 class ComplementaryActivityFormBack {
@@ -21,14 +22,8 @@ class ComplementaryActivityFormBack {
   }
 
   save(BuildContext context) async {
-    validateAll();
     await _service.save(activity!);
-    Navigator.of(context).pop();
-  }
-
-  validateAll() {
-    validateGroup(activity!.group.toString());
-    validateHours(activity!.hours.toString());
+    Navigator.of(context).pushNamed(Routes.COMPLEMENTARY_LIST);
   }
 
   validateGroup(String value) {

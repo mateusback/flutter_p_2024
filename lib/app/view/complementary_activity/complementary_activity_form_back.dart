@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_p_2024/app/domain/entities/complementary_activity.dart';
+import 'package:flutter_p_2024/app/domain/enum/e_activity_group.dart';
 import 'package:flutter_p_2024/app/domain/services/complementary_activity_service.dart';
 import 'package:flutter_p_2024/app/navigation/routes.dart';
 import 'package:get_it/get_it.dart';
@@ -9,12 +10,10 @@ class ComplementaryActivityFormBack {
   ComplementaryActivity? activity;
   bool? _groupIsValid = false;
   bool? _hoursIsValid = false;
-  BuildContext? _context;
 
   bool get isValid => _groupIsValid! && _hoursIsValid!;
 
   ComplementaryActivityFormBack(BuildContext context) {
-    this._context = context;
     var parameters = ModalRoute.of(context)!.settings.arguments;
     activity = (parameters != null)
         ? parameters as ComplementaryActivity
@@ -37,15 +36,19 @@ class ComplementaryActivityFormBack {
     }
   }
 
-  validateHours(String value) {
+  validateHours(String value, int hours, EActivityGroup group) {
     try {
-      _service.validateHours(value);
+      _service.validateHours(value, hours, group);
       _hoursIsValid = true;
       return null;
     } catch (e) {
       _hoursIsValid = false;
       return e.toString();
     }
+  }
+
+  Future<int> getHours(EActivityGroup group) {
+    return Future.value(0);
   }
 
   String describeEnum(Object enumEntry) {

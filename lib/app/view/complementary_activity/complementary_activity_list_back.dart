@@ -26,19 +26,18 @@ abstract class _ComplementaryActivityListBack with Store {
     refreshList();
   }
 
-  goToCertificates(BuildContext context,
-      [List<ComplementaryActivity?>? groupedActivities,
-      EActivityGroup? group]) {
+  goToCertificates(BuildContext context, [EActivityGroup? group]) {
     Navigator.of(context).pushNamed(
       Routes.CERTIFICATES_LIST,
-      arguments: {'group': group, 'activities': groupedActivities},
-    );
+      arguments: {'group': group},
+    ).then(refreshList);
   }
 
   goToForm(BuildContext context,
       [ComplementaryActivity? complementaryActivity]) {
     Navigator.of(context)
-        .pushNamed(Routes.COMPLEMENTARY_FORM, arguments: complementaryActivity);
+        .pushNamed(Routes.COMPLEMENTARY_FORM, arguments: complementaryActivity)
+        .then(refreshList);
   }
 
   remove(BuildContext context, dynamic complementaryId) async {

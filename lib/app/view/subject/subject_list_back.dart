@@ -25,15 +25,21 @@ abstract class _SubjectListBack with Store {
   }
 
   goToGradesList(BuildContext context, [Subject? subject]) {
-    Navigator.of(context).pushNamed(Routes.GRADES_LIST, arguments: subject);
+    Navigator.of(context)
+        .pushNamed(Routes.GRADES_LIST, arguments: subject)
+        .then(refreshList);
   }
 
   goToForm(BuildContext context, [Subject? subject]) {
-    Navigator.of(context).pushNamed(Routes.SUBJECT_FORM, arguments: subject);
+    Navigator.of(context)
+        .pushNamed(Routes.SUBJECT_FORM, arguments: subject)
+        .then(refreshList);
   }
 
   gotToDetails(BuildContext context, Subject subject) {
-    Navigator.of(context).pushNamed(Routes.HOME, arguments: subject);
+    Navigator.of(context)
+        .pushNamed(Routes.HOME, arguments: subject)
+        .then(refreshList);
   }
 
   remove(BuildContext context, dynamic subjectId) async {

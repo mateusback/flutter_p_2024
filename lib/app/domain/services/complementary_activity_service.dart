@@ -10,7 +10,7 @@ class ComplementaryActivityService {
     _repository.save(activity);
   }
 
-  remove(int id) {
+  remove(dynamic id) {
     _repository.remove(id);
   }
 
@@ -24,16 +24,33 @@ class ComplementaryActivityService {
     }
   }
 
-  validateHours(String value) {
+  validateHours(String value, int totalHours, EActivityGroup group) {
+    int newHours = 0;
     try {
-      int.tryParse(value);
+      newHours = int.parse(value);
     } catch (e) {
-      throw DomainLayerException(
-          'A quantidade de horas deve ser um número inteiro');
+      throw 'As horas devem ser um número inteiro';
     }
-    var parsedvalue = int.parse(value);
-    if (parsedvalue < 1) {
+    int maxHours = 100;
+    switch (group) {
+      case EActivityGroup.Ensino:
+        maxHours = 155;
+        break;
+      case EActivityGroup.Extensao:
+        maxHours = 40;
+        break;
+      case EActivityGroup.Social:
+        maxHours = 40;
+        break;
+      default:
+        throw DomainLayerException('Grupo desconhecido');
+    }
+
+    if (newHours < 1) {
       throw DomainLayerException('A quantidade de horas deve ser maior que 0');
+    }
+    if (totalHours + newHours > maxHours) {
+      throw 'O total de horas excede o limite permitido de $maxHours horas. Total Atual: $totalHours horas';
     }
   }
 }

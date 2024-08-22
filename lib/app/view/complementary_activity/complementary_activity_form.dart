@@ -4,6 +4,10 @@ import 'package:flutter_p_2024/app/view/complementary_activity/complementary_act
 
 class ComplementaryActivityForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
+  EActivityGroup? _group;
+  var _hours0;
+  var _hours1;
+  var _hours2;
 
   Widget fieldCertificateName(ComplementaryActivityFormBack back) {
     var initValue = back.activity!.certificateName;
@@ -25,17 +29,25 @@ class ComplementaryActivityForm extends StatelessWidget {
 
   Widget filedHours(ComplementaryActivityFormBack back) {
     var initValue = back.activity!.hours;
+    int hours = 0;
+    if (_group != null) {
+      _group!.index == 0
+          ? _hours0.then((value) => hours = value)
+          : _group!.index == 1
+              ? _hours1.then((value) => hours = value)
+              : _hours2.then((value) => hours = value);
+    }
     return TextFormField(
       onSaved: (newValue) => back.activity!.hours = int.parse(newValue!),
       initialValue: initValue != null ? initValue.toString() : '',
       decoration: const InputDecoration(labelText: 'Quantidade de horas:'),
-      validator: (value) => back.validateHours(value!),
+      validator: (value) =>
+          back.validateHours(value!, 1, EActivityGroup.Ensino),
     );
   }
 
   Widget fieldGroup(ComplementaryActivityFormBack back) {
     int? selectedPeriod = back.activity?.group?.index;
-
     return DropdownButtonFormField<int>(
       value: selectedPeriod,
       items: [
@@ -62,6 +74,7 @@ class ComplementaryActivityForm extends StatelessWidget {
       onChanged: (int? newValue) {
         if (newValue != null) {
           selectedPeriod = newValue;
+          _group = EActivityGroupExtension.fromInt(newValue);
         }
       },
       onSaved: (newValue) => back.activity!.group =
@@ -74,6 +87,9 @@ class ComplementaryActivityForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _back = ComplementaryActivityFormBack(context);
+    _hours0 = _back.getHours(EActivityGroup.Ensino);
+    _hours1 = _back.getHours(EActivityGroup.Extensao);
+    _hours2 = _back.getHours(EActivityGroup.Social);
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastro de Certificados'),
@@ -85,7 +101,6 @@ class ComplementaryActivityForm extends StatelessWidget {
                   _form.currentState!.save();
                   if (_back.isValid) {
                     _back.save(context);
-                    //BUG - ATUALIZAR A LISTA DEPOIS DE SALVAR
                   }
                 }
               })

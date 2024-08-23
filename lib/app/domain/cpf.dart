@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 
 class CPF {
   late List<int> _numerosCPF;
-  final _repository = GetIt.I.get<ProfessorDao>();
+  final _repository = GetIt.I.get<IProfessorDao>();
 
   CPF(String cpf) {
     if (cpf.isEmpty) throw ArgumentError('CPF cannot be empty');
